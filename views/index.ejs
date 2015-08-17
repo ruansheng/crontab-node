@@ -1,10 +1,11 @@
 <!doctype html>
 <head>
-<title>Crontab UI</title>
+<title>Crontab Node</title>
 <script src="jquery.js"></script>
 <script src="script.js"></script>
 <script src="bootstrap.min.js"></script>
 <link rel="stylesheet" href="bootstrap.min.css" />
+<link rel="stylesheet" href="self.css" />
 <script type="text/javascript">
 	var crontabs = [];
 	var routes = [];
@@ -35,12 +36,12 @@
 
 	<table class="table">
 	<tr>
-		<th>Id</th>
-		<th>Name</th>
-		<th>Job</th>
-		<th>Time</th>
-		<th>Last Modified</th>
-		<th></th>
+		<th class="t-c w-3">Id</th>
+		<th class="t-c w-20">Name</th>
+		<th class="t-c w-32">Job</th>
+		<th class="t-c w-10">Time</th>
+		<th class="t-c w-15">Modified</th>
+		<th class="t-c w-20">Operate</th>
 	</tr>
 	<% var index = 1 %>
 	<% JSON.parse(crontabs).forEach(function(crontab){ %>
@@ -48,23 +49,22 @@
 		<% if (!crontab.stopped) { %>
 			<tr>
 		<% } else { %>
-			<tr style="background:#3A6DA6;color:#fff">
+			<tr class="t-c" style="background:#3A6DA6;color:#fff">
 		<% } %>
-				<td>
-					<%= index %>.
+				<td class="t-c">
+					<a class="btn" data-toggle="tooltip" data-placement="right" title="<%= crontab._id %>"><%= index %></a>
 					<% index += 1 %>
-					<%= crontab._id %>
 				</td>
 
-				<td>
+				<td class="t-c">
 					<% if (crontab.name) { %>
-					<a class="btn" data-toggle="tooltip" data-placement="right" title="<%= crontab.name %>"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> </a>
+					<%= crontab.name %>
 					<% } %>
 				</td>
-				<td><%= crontab.command %></td>
-				<td><span style="cursor:pointer" data-toggle="tooltip" data-placement="bottom" title="<%= crontab.next %>"><%= crontab.schedule %></span></td>
-				<td><%= crontab.timestamp %></td>
-				<td>
+				<td class="t-c"><%= crontab.command %></td>
+				<td class="t-c"><span style="cursor:pointer" data-toggle="tooltip" data-placement="bottom" title="<%= crontab.next %>"><%= crontab.schedule %></span></td>
+				<td class="t-c"><%= crontab.timestamp %></td>
+				<td class="t-c">
 
 		<!-- controls based on crontab state -->
 		<% if (!crontab.stopped) { %>
